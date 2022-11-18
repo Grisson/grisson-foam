@@ -65,8 +65,6 @@ keywords: ROS concepts node topic service action param
 
 ## Custom Package
 
-rosdep install -i --from-path src --rosdistro humble -y
-
 sudo rosdep init
 rosdep update
 
@@ -75,4 +73,54 @@ colcon build --packages-up-to
             --event-handlers console_direct+
 
 
-. install/local_setup.sh
+__Create Package__
+* Navigate to `<workspace>/src` folder, 
+* `ros2 pkg create --build-type __ament_cmake__ --node-name <node_name> <package_name>`
+or
+* `ros2 pkg create --build-type ament_python <package_name>`
+  
+
+__Config Package__
+* C++
+  * Package.xml
+    * update metadata information
+    * add `exec_depend`
+  * CMakeLists.txt
+    * add `find_package`
+    * add `add_executable`
+    * add `ament_target_dependencies` 
+    * add `install`
+* Python
+  * Package.xml
+    * update metadata information
+    * add `exec_depend`
+  * setup.py
+    * update metadata information
+    * add entries into `entry_points`
+  * setup.cfg
+    * N/A
+
+__Resolve Dependency__
+* Navigate to `<workspace>` folder
+* `rosdep install -i --from-path src --rosdistro humble -y`
+
+
+__Build Package__
+* Navigate to `<workspace>` folder
+* `colcon build --packages-select <package_name>`
+
+
+__Overlay Package__
+`. install/local_setup.sh`
+
+## Simulation
+
+### Installation
+`curl -sSL http://get.gazebosim.org | sh`
+
+### Run
+`gazebo`
+
+## Questions
+* how to configure package.xml and CMakeLists.txt
+* 

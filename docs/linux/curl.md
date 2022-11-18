@@ -11,4 +11,4 @@ keywords: linux curl
 -o
 -O
 -f
--L
+-Lz
